@@ -32,7 +32,6 @@ galaxy_info:
 
   galaxy_tags:
       - development
-      - virtualization
 
 dependencies: []
   # List your role dependencies here, one per line.

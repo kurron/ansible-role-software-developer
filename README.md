@@ -1,7 +1,7 @@
 Role Name
 =========
 
-Installation of tools than any self-respecting JVM developer loves and needs.
+Installation of tools than any self-respecting software developer loves and needs.
 
 Requirements
 ------------
@@ -11,16 +11,7 @@ TODO
 Role Variables
 --------------
 
-* jvm_oracle_jdk_install: true
-* jvm_oracle_jdk_version: jdk1.8.0_111
-* jvm_oracle_jdk_path: 8u111-b14/jdk-8u111
-* jvm_oracle_jdk_link_destination: oracle-jdk-8
-
-* jvm_sdkman_install: true
-
-* jvm_intellij_install: true
-* jvm_intellij_version: 2016.2.4
-* jvm_intellij_build: 162.2032.8
+TODO
 
 Dependencies
 ------------
@@ -33,7 +24,7 @@ Example Playbook
 ```
 - hosts: servers
   roles:
-      - { role: kurron.jvm-developer, jvm_sdkman_install: false, vm_intellij_version: 2016.2.4, jvm_intellij_build: 162.2032.8 }
+      - { role: kurron.software-developer, jvm_sdkman_install: false, vm_intellij_version: 2016.2.4, jvm_intellij_build: 162.2032.8 }
 ```
 
 License

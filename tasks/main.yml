@@ -1,15 +1,5 @@
 ---
-- name: Create privledged folders 
-  become: yes
-  file:
-      path: "{{item}}"
-      state: directory
-      mode: 0755
-      recurse: yes
-  with_items:
-  - "{{jvm_destination}}"
-
-- name: Create unprivledged folders
+- name: Create folders
   become: no
   file:
       path: "{{item}}"
@@ -17,7 +7,8 @@
       mode: 0755
       recurse: yes
   with_items:
-  - "{{ansible_user_dir}}/{{jvm_software_directory}}"
+  - "{{ansible_user_dir}}/GitHub"
+  - "{{ansible_user_dir}}/Bitbucket"
 
 - name: Install Required Packages
   become: yes
@@ -25,106 +16,13 @@
       name: "{{item}}"
       state: present
   with_items:
+  - "git"
+  - "subversion"
+  - "mercurial"
+  - "sshpass"
   - "curl"
-  when: ansible_distribution == "Ubuntu"
-
-- name: Download Oracle JDK Tarball
-  become: no
-  get_url:
-      url: "http://download.oracle.com/otn-pub/java/jdk/{{ jvm_oracle_jdk_path }}-linux-x64.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/oracle-jdk-{{ jvm_oracle_jdk_version }}.tar.gz"
-      headers: 'Cookie:oraclelicense=accept-securebackup-cookie'
-      mode: 0444
-  when: jvm_oracle_jdk_install
-
-- name: Uncompress Oracle JDK Tarball
-  become: yes
-  unarchive:
-      src: "{{ansible_user_dir}}/{{jvm_download_directory}}/oracle-jdk-{{jvm_oracle_jdk_version}}.tar.gz"
-      dest: "{{ jvm_destination }}"
-      copy: no
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-      creates: "{{ jvm_destination }}/{{jvm_oracle_jdk_version}}/COPYRIGHT"
-  when: jvm_oracle_jdk_install
-
-- name: Test Oracle JDK
-  become: no
-  command: "{{jvm_destination}}/{{jvm_oracle_jdk_version}}/bin/java -version"
-  when: jvm_oracle_jdk_install
-
-- name: Create Softlink To Oracle JDK
-  become: yes
-  file: 
-      src: "{{jvm_destination}}/{{jvm_oracle_jdk_version}}"
-      dest: "{{jvm_destination}}/{{jvm_oracle_jdk_link_destination}}"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      state: link
-  when: jvm_oracle_jdk_install
-
-- name: Set Global Environment To Use Oracle JDK
-  become: yes
-  template: 
-      src: "templates/oracle-jdk-environment.sh.j2"
-      dest: "/etc/profile.d/oracle-jdk-environment.sh"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-  when: jvm_oracle_jdk_install
-
-- name: Download SDKMAN!
-  become: no
-  get_url:
-      url: "https://get.sdkman.io"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/sdkman-install.sh"
-      mode: 0554
-  when: jvm_sdkman_install
-
-- name: Run SDKMAN! Installer
-  become: no
-  shell: "{{ansible_user_dir}}/{{jvm_download_directory}}/sdkman-install.sh"
-  when: jvm_sdkman_install
-
-- name: Download IntelliJ IDEA Tarball
-  become: no
-  get_url:
-      url: "https://download.jetbrains.com/idea/ideaIU-{{ jvm_intellij_version }}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_download_directory}}/idea-{{ jvm_intellij_version }}.tar.gz"
-      mode: 0444
-  when: jvm_intellij_install
-
-- name: Uncompress IntelliJ IDEA Tarball
-  become: no
-  unarchive:
-      src: "{{ansible_user_dir}}/{{jvm_download_directory}}/idea-{{ jvm_intellij_version }}.tar.gz"
-      dest: "{{ansible_user_dir}}/{{jvm_software_directory}}"
-      copy: no
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-      creates: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea-IU-{{jvm_intellij_build}}/build.txt"
-  when: jvm_intellij_install
-
-- name: Create Softlink To IntelliJ IDEA
-  become: no
-  file:
-      src: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea-IU-{{jvm_intellij_build}}"
-      dest: "{{ansible_user_dir}}/{{jvm_software_directory}}/idea"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      state: link
-  when: jvm_intellij_install
-
-- name: Create Desktop Icon For IntelliJ IDEA
-  become: no
-  template:
-      src: "templates/idea.desktop.j2"
-      dest: "{{ansible_user_dir}}/Desktop/idea.desktop"
-      owner: "{{ansible_user_uid}}"
-      group: "{{ansible_user_gid}}"
-      mode: 0555
-  when: jvm_intellij_install
+  - "apt-transport-https"
+  - "apache2-utils"
+  - "httping"
 
 

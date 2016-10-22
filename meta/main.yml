@@ -13,8 +13,8 @@ galaxy_info:
   - name: Fedora
     versions:
     - 24
-  #- name: Ubuntu
-  #  versions:
+  - name: Ubuntu
+    versions:
   #  - all
   #  - lucid
   #  - maverick
@@ -28,7 +28,7 @@ galaxy_info:
   #  - utopic
   #  - vivid
   #  - wily
-  #  - xenial
+    - xenial
 
   galaxy_tags:
       - development

@@ -20,12 +20,8 @@
   - "subversion"
   - "mercurial"
   - "sshpass"
-  - "curl"
-  - "apt-transport-https"
   - "apache2-utils"
   - "httping"
-  - "python-pip"
-  - "python-dev"
 
 - name: Install Python Packages
   become: yes

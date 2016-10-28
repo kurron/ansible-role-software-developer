@@ -16,7 +16,7 @@ None.
 Dependencies
 ------------
 
-No dependencies.
+* kurron.base
 
 Example Playbook
 ----------------

@@ -20,8 +20,16 @@
   - "subversion"
   - "mercurial"
   - "sshpass"
-  - "apache2-utils"
   - "httping"
+
+- name: Install Required Packages
+  become: yes
+  package:
+      name: "{{item}}"
+      state: present
+  with_items:
+  - "apache2-utils"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install Python Packages
   become: yes

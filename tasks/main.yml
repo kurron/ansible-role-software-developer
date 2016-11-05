@@ -41,3 +41,20 @@
   - "setuptools"
   - "httpie"
 
+- name: Install Atom Editor
+  become: yes
+  apt:
+      deb: "https://github.com/atom/atom/releases/download/v{{developer_atom_version}}/atom-amd64.deb"
+  when: (ansible_distribution == "Ubuntu") and (developer_atom_install)
+
+- name: Install Atom Editor
+  become: yes
+  dnf:
+      name: "https://github.com/atom/atom/releases/download/v{{developer_atom_version}}/atom.x86_64.rpm"
+  when: (ansible_distribution == "Fedora") and (developer_atom_install)
+
+- name: Install Atom Editor
+  become: yes
+  yum:
+      name: "https://github.com/atom/atom/releases/download/v{{developer_atom_version}}/atom.x86_64.rpm"
+  when: (ansible_distribution == "CentOS") and (developer_atom_install)

@@ -21,6 +21,7 @@
   - "mercurial"
   - "sshpass"
   - "httping"
+  - "firefox"
 
 - name: Install Required Packages
   become: yes

@@ -58,3 +58,10 @@
   yum:
       name: "https://github.com/atom/atom/releases/download/v{{developer_atom_version}}/atom.x86_64.rpm"
   when: (ansible_distribution == "CentOS") and (developer_atom_install)
+
+- name: Install Visual Studio Code Editor
+  become: yes
+  apt:
+      deb: "https://go.microsoft.com/fwlink/?LinkID=760868"
+  when: (ansible_distribution == "Ubuntu") and (developer_visual_studio_install)
+

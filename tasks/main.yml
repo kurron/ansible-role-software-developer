@@ -65,3 +65,9 @@
       deb: "https://go.microsoft.com/fwlink/?LinkID=760868"
   when: (ansible_distribution == "Ubuntu") and (developer_visual_studio_install)
 
+- name: Install Compass, the MongoDB IDE
+  become: yes
+  apt:
+      deb: "https://downloads.mongodb.com/compass/mongodb-compass_{{ developer_compass_version }}_amd64.deb"
+  when: (ansible_distribution == "Ubuntu") and (developer_compass_install)
+

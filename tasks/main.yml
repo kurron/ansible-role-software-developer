@@ -29,6 +29,7 @@
       state: present
   with_items:
   - "apache2-utils"
+  - "meld"
   when: ansible_distribution == "Ubuntu"
 
 - name: Install Python Packages

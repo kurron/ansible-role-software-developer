@@ -6,7 +6,7 @@
       state: directory
       mode: 0755
       recurse: yes
-  with_items:
+  loop:
   - "{{ansible_user_dir}}/GitHub"
   - "{{ansible_user_dir}}/Bitbucket"
 
@@ -15,7 +15,7 @@
   package:
       name: "{{item}}"
       state: present
-  with_items:
+  loop:
   - "git"
   - "subversion"
   - "mercurial"
@@ -27,7 +27,7 @@
   package:
       name: "{{item}}"
       state: present
-  with_items:
+  loop:
   - "apache2-utils"
   - "meld"
   when: ansible_distribution == "Ubuntu"
@@ -37,7 +37,7 @@
   pip:
       name: "{{item}}"
       state: latest
-  with_items:
+  loop:
   - "pip"
   - "setuptools"
   - "httpie"

@@ -7,7 +7,7 @@
     "builders": [
         {
             "type": "docker",
-            "image": "ubuntu:latest",
+            "image": "ubuntu:18.04",
             "commit": true,
             "changes": []
         }

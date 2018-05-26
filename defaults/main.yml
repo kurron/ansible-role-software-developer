@@ -1,8 +1,8 @@
 ---
 developer_atom_install: true
-developer_atom_version: 1.24.0
+developer_atom_version: 1.27.0
 
 developer_visual_studio_install: true
 
 developer_compass_install: true
-developer_compass_version: 1.12.0
+developer_compass_version: 1.13.0

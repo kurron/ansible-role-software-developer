@@ -1,8 +1,10 @@
 ---
+# https://atom.io/
 developer_atom_install: false
-developer_atom_version: 1.27.0
+developer_atom_version: 1.33.1
 
-developer_visual_studio_install: false
+developer_visual_studio_install: true
 
+# https://www.mongodb.com/download-center/compass
 developer_compass_install: true
 developer_compass_version: 1.16.3
